@@ -51,7 +51,7 @@ The screenshot below shows a successful `200 OK` response from a Postman request
 
 The project uses Gemini `gemini-3.5-flash-lite` through Spring AI. Gemini was selected because Google currently lists free input and output token pricing for this model on its standard free tier, making it suitable for an assignment demonstration. Free-tier availability, quotas, and model access can vary. Google may use free-tier prompts to improve its products, so avoid submitting sensitive customer information. See [Gemini model details and pricing](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite).
 
-The system prompt asks for a concise subject and body in the requested tone, treats request fields as content, and tells the model not to invent facts. The API key is supplied at runtime using `GEMINI_API_KEY`; credentials are intentionally not stored in this repository.
+The system prompt asks for a concise subject and body in the requested tone, treats request fields as content, and tells the model not to invent facts. Generate or manage a Gemini API key in [Google AI Studio API keys](https://aistudio.google.com/apikey). The API key is supplied at runtime using `GEMINI_API_KEY`; credentials are intentionally not stored in this repository. See Google's [Gemini API key setup guide](https://ai.google.dev/gemini-api/docs/api-key) for key and environment variable instructions.
 
 ## Configuration reference
 
