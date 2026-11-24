@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="900" viewBox="0 0 1720 900" role="img" aria-labelledby="title description">
+  <title id="title">AI-Powered Email Template Generator architecture</title>
+  <desc id="description">A request enters the Spring MVC controller, is validated and passed through the email service and provider abstraction to Spring AI ChatClient and Gemini. The response returns to the client. Separate panels explain DTOs, configuration, and exception handling.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#eef3fa"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#20304a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#60738f"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#4276d7"/>
+    </marker>
+    <marker id="arrowBack" markerWidth="10" markerHeight="10" refX="2" refY="5" orient="auto">
+      <path d="M10,0 L0,5 L10,10 Z" fill="#18a38c"/>
+    </marker>
+    <style>
+      text { font-family: Inter, "Segoe UI", Arial, sans-serif; }
+      .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 2px; fill: #58708f; }
+      .title { font-size: 32px; font-weight: 750; fill: #17283f; }
+      .subtitle { font-size: 17px; fill: #60738f; }
+      .card { fill: #ffffff; stroke: #dbe4ef; stroke-width: 1.5; }
+      .nodeTitle { font-size: 17px; font-weight: 700; fill: #1c2f49; }
+      .nodeSub { font-size: 13px; fill: #64758e; }
+      .small { font-size: 12px; fill: #64758e; }
+      .panelTitle { font-size: 18px; font-weight: 700; fill: #1c2f49; }
+      .panelText { font-size: 14px; fill: #52657e; }
+      .blue { fill: #4276d7; }
+      .teal { fill: #168d7c; }
+      .purple { fill: #755ac2; }
+      .orange { fill: #c77a25; }
+      .line { stroke: #7487a0; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1720" height="900" rx="28" fill="url(#background)"/>
+  <circle cx="1580" cy="90" r="130" fill="#dceafa" opacity="0.45"/>
+  <circle cx="1550" cy="85" r="82" fill="#e8e2fa" opacity="0.45"/>
+
+  <text x="60" y="48" class="eyebrow">SPRING BOOT 4.2  ·  SPRING AI 2.1  ·  GEMINI</text>
+  <text x="60" y="94" class="title">How a request becomes an email</text>
+  <text x="60" y="126" class="subtitle">A layered request path with a provider boundary, centralized error mapping, and environment-based model configuration.</text>
+
+  <rect x="35" y="158" width="1650" height="325" rx="22" fill="#f4f8fd" stroke="#d8e3f0" stroke-width="1.5" stroke-dasharray="8 7"/>
+  <rect x="58" y="145" width="176" height="27" rx="13" fill="#e5edf8"/>
+  <text x="76" y="164" class="eyebrow" style="font-size:11px;letter-spacing:1.4px">REQUEST / RESPONSE PATH</text>
+
+  <!-- Request path nodes -->
+  <g filter="url(#shadow)">
+    <rect x="52" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="52" y="226" width="205" height="7" rx="4" fill="#4276d7"/>
+    <circle cx="78" cy="263" r="15" fill="#e9f0ff"/><text x="78" y="268" text-anchor="middle" class="small blue" style="font-weight:700">1</text>
+    <text x="101" y="269" class="nodeTitle">HTTP client</text>
+    <text x="72" y="309" class="nodeSub">Postman / consumer</text>
+    <text x="72" y="338" class="small">POST /api/v1/</text>
+    <text x="72" y="357" class="small">email-templates</text>
+    <text x="72" y="382" class="small" style="font-weight:700;fill:#4276d7">JSON request</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="287" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="287" y="226" width="205" height="7" rx="4" fill="#4276d7"/>
+    <circle cx="313" cy="263" r="15" fill="#e9f0ff"/><text x="313" y="268" text-anchor="middle" class="small blue" style="font-weight:700">2</text>
+    <text x="336" y="269" class="nodeTitle">API controller</text>
+    <text x="307" y="309" class="nodeSub">controllers</text>
+    <text x="307" y="338" class="small">@PostMapping</text>
+    <text x="307" y="357" class="small">@Valid request DTO</text>
+    <text x="307" y="382" class="small" style="font-weight:700;fill:#4276d7">HTTP boundary</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="522" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="522" y="226" width="205" height="7" rx="4" fill="#755ac2"/>
+    <circle cx="548" cy="263" r="15" fill="#f0ecfb"/><text x="548" y="268" text-anchor="middle" class="small purple" style="font-weight:700">3</text>
+    <text x="571" y="269" class="nodeTitle">Email service</text>
+    <text x="542" y="309" class="nodeSub">services.impl</text>
+    <text x="542" y="338" class="small">Coordinates generation</text>
+    <text x="542" y="357" class="small">and response timing</text>
+    <text x="542" y="382" class="small" style="font-weight:700;fill:#755ac2">Application logic</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="757" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="757" y="226" width="205" height="7" rx="4" fill="#755ac2"/>
+    <circle cx="783" cy="263" r="15" fill="#f0ecfb"/><text x="783" y="268" text-anchor="middle" class="small purple" style="font-weight:700">4</text>
+    <text x="806" y="269" class="nodeTitle">Provider port</text>
+    <text x="777" y="309" class="nodeSub">services</text>
+    <text x="777" y="338" class="small">EmailGenerationProvider</text>
+    <text x="777" y="357" class="small">keeps AI provider swappable</text>
+    <text x="777" y="382" class="small" style="font-weight:700;fill:#755ac2">Interface</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="992" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="992" y="226" width="205" height="7" rx="4" fill="#168d7c"/>
+    <circle cx="1018" cy="263" r="15" fill="#e4f6f2"/><text x="1018" y="268" text-anchor="middle" class="small teal" style="font-weight:700">5</text>
+    <text x="1041" y="269" class="nodeTitle">Gemini adapter</text>
+    <text x="1012" y="309" class="nodeSub">services.impl</text>
+    <text x="1012" y="338" class="small">Builds system + user prompt</text>
+    <text x="1012" y="357" class="small">Logs provider-call duration</text>
+    <text x="1012" y="382" class="small" style="font-weight:700;fill:#168d7c">Provider implementation</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1227" y="226" width="205" height="174" rx="18" class="card"/>
+    <rect x="1227" y="226" width="205" height="7" rx="4" fill="#168d7c"/>
+    <circle cx="1253" cy="263" r="15" fill="#e4f6f2"/><text x="1253" y="268" text-anchor="middle" class="small teal" style="font-weight:700">6</text>
+    <text x="1276" y="269" class="nodeTitle">Spring AI</text>
+    <text x="1247" y="309" class="nodeSub">ChatClient</text>
+    <text x="1247" y="338" class="small">Google GenAI starter</text>
+    <text x="1247" y="357" class="small">handles model integration</text>
+    <text x="1247" y="382" class="small" style="font-weight:700;fill:#168d7c">AI abstraction</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1462" y="226" width="205" height="174" rx="18" fill="#17283f"/>
+    <rect x="1462" y="226" width="205" height="7" rx="4" fill="#f2aa50"/>
+    <circle cx="1488" cy="263" r="15" fill="#384a62"/><text x="1488" y="268" text-anchor="middle" class="small" style="font-weight:700;fill:#ffd08d">7</text>
+    <text x="1511" y="269" class="nodeTitle" style="fill:#fff">Gemini API</text>
+    <text x="1482" y="309" class="nodeSub" style="fill:#bac6d7">External model service</text>
+    <text x="1482" y="338" class="small" style="fill:#d8e1ec">gemini-3.5-flash-lite</text>
+    <text x="1482" y="357" class="small" style="fill:#d8e1ec">generates the email text</text>
+    <text x="1482" y="382" class="small" style="font-weight:700;fill:#ffd08d">External boundary</text>
+  </g>
+
+  <!-- Forward arrows between nodes -->
+  <path d="M257 313 H278" class="line"/>
+  <path d="M492 313 H513" class="line"/>
+  <path d="M727 313 H748" class="line"/>
+  <path d="M962 313 H983" class="line"/>
+  <path d="M1197 313 H1218" class="line"/>
+  <path d="M1432 313 H1453" class="line"/>
+
+  <!-- Response path -->
+  <path d="M1564 428 H155" fill="none" stroke="#18a38c" stroke-width="2.5" stroke-dasharray="8 7" marker-end="url(#arrowBack)"/>
+  <rect x="624" y="405" width="470" height="42" rx="21" fill="#e4f6f2" stroke="#bde8dc"/>
+  <text x="859" y="432" text-anchor="middle" class="panelText" style="font-weight:700;fill:#168d7c">Response returns with emailTemplate + generationTimeMs</text>
+
+  <!-- Supporting architecture panels -->
+  <g filter="url(#shadow)">
+    <rect x="52" y="510" width="480" height="245" rx="20" class="card"/>
+    <rect x="52" y="510" width="480" height="8" rx="4" fill="#4276d7"/>
+    <text x="78" y="557" class="panelTitle">DTO contract</text>
+    <text x="78" y="589" class="panelText">dto package · request and response shapes</text>
+    <rect x="78" y="610" width="202" height="105" rx="13" fill="#f1f5fc" stroke="#dbe4ef"/>
+    <text x="96" y="639" class="nodeTitle" style="font-size:14px">GenerateEmailRequest</text>
+    <text x="96" y="665" class="small">purpose · recipient_name · tone</text>
+    <text x="96" y="692" class="small">Jakarta validation constraints</text>
+    <rect x="300" y="610" width="206" height="105" rx="13" fill="#f1f5fc" stroke="#dbe4ef"/>
+    <text x="318" y="639" class="nodeTitle" style="font-size:14px">GenerateEmailResponse</text>
+    <text x="318" y="665" class="small">recipientName · emailTemplate</text>
+    <text x="318" y="692" class="small">generationTimeMs</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="568" y="510" width="520" height="245" rx="20" class="card"/>
+    <rect x="568" y="510" width="520" height="8" rx="4" fill="#168d7c"/>
+    <text x="594" y="557" class="panelTitle">Configuration and prompt</text>
+    <text x="594" y="590" class="panelText">application.yml binds runtime settings; the API key stays outside source control.</text>
+    <rect x="594" y="616" width="468" height="91" rx="13" fill="#eff8f6" stroke="#d0ece5"/>
+    <text x="616" y="645" class="nodeSub" style="font-family:Consolas,monospace">GEMINI_API_KEY → Spring AI Google GenAI</text>
+    <text x="616" y="673" class="nodeSub" style="font-family:Consolas,monospace">GEMINI_MODEL → gemini-3.5-flash-lite</text>
+    <text x="594" y="733" class="small">System prompt sets output rules; request fields are passed as user content.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1124" y="510" width="543" height="245" rx="20" class="card"/>
+    <rect x="1124" y="510" width="543" height="8" rx="4" fill="#d28b39"/>
+    <text x="1150" y="557" class="panelTitle">Errors and HTTP responses</text>
+    <text x="1150" y="590" class="panelText">ApiExceptionHandler centralizes API error mapping.</text>
+    <rect x="1150" y="616" width="153" height="78" rx="12" fill="#fff6e9" stroke="#f0d7b4"/>
+    <text x="1226" y="646" text-anchor="middle" class="nodeTitle" style="font-size:14px">Invalid input</text>
+    <text x="1226" y="674" text-anchor="middle" class="small orange">400 Bad Request</text>
+    <rect x="1318" y="616" width="153" height="78" rx="12" fill="#fff6e9" stroke="#f0d7b4"/>
+    <text x="1394" y="646" text-anchor="middle" class="nodeTitle" style="font-size:14px">Provider failure</text>
+    <text x="1394" y="674" text-anchor="middle" class="small orange">502 Bad Gateway</text>
+    <rect x="1486" y="616" width="153" height="78" rx="12" fill="#fff6e9" stroke="#f0d7b4"/>
+    <text x="1562" y="646" text-anchor="middle" class="nodeTitle" style="font-size:14px">Missing key</text>
+    <text x="1562" y="674" text-anchor="middle" class="small orange">503 Unavailable</text>
+    <text x="1150" y="728" class="small">AiProviderException lives in the exceptions package.</text>
+  </g>
+
+  <text x="60" y="830" class="small">SOLID ARROW</text>
+  <path d="M142 826 H205" stroke="#60738f" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <text x="224" y="830" class="small">request to Gemini</text>
+  <path d="M385 826 H448" stroke="#18a38c" stroke-width="2.5" stroke-dasharray="8 7" marker-end="url(#arrowBack)"/>
+  <text x="466" y="830" class="small">generated response back to client</text>
+  <text x="1660" y="830" text-anchor="end" class="small">Package names shown in each layer</text>
+</svg>
