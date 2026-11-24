@@ -51,7 +51,13 @@ The screenshot below shows a successful `200 OK` response from a Postman request
 
 The project uses Gemini `gemini-3.5-flash-lite` through Spring AI. Gemini was selected because Google currently lists free input and output token pricing for this model on its standard free tier, making it suitable for an assignment demonstration. Free-tier availability, quotas, and model access can vary. Google may use free-tier prompts to improve its products, so avoid submitting sensitive customer information. See [Gemini model details and pricing](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite).
 
-The system prompt asks for a concise subject and body in the requested tone, treats request fields as content, and tells the model not to invent facts. Generate or manage a Gemini API key in [Google AI Studio API keys](https://aistudio.google.com/apikey). The API key is supplied at runtime using `GEMINI_API_KEY`; credentials are intentionally not stored in this repository. See Google's [Gemini API key setup guide](https://ai.google.dev/gemini-api/docs/api-key) for key and environment variable instructions.
+### Prompt design
+
+The prompt separates stable instructions from the request-specific details. The system prompt defines the model's role and expected result: a concise customer-friendly email with a clear subject and body, matching the requested tone and starting with `Subject:`. The user prompt passes only the purpose, recipient name, and tone collected by the API.
+
+This separation keeps the output format consistent while allowing each request to produce a relevant message. The system instructions treat those supplied values as content rather than directions that can override the prompt, and tell the model not to make up facts, promises, dates, prices, or account details. The application then returns the generated text along with the recipient name and generation time.
+
+Generate or manage a Gemini API key in [Google AI Studio API keys](https://aistudio.google.com/apikey). The API key is supplied at runtime using `GEMINI_API_KEY`; credentials are intentionally not stored in this repository. See Google's [Gemini API key setup guide](https://ai.google.dev/gemini-api/docs/api-key) for key and environment variable instructions.
 
 ## Configuration reference
 
