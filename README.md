@@ -41,6 +41,12 @@ Example response:
 }
 ```
 
+### Example Postman response
+
+The screenshot below shows a successful `200 OK` response from a Postman request to the email-template endpoint.
+
+![Postman example showing a successful email template generation response](docs/postman-success-response.png)
+
 ## AI provider and prompt design
 
 The project uses Gemini `gemini-3.5-flash-lite` through Spring AI. Gemini was selected because Google currently lists free input and output token pricing for this model on its standard free tier, making it suitable for an assignment demonstration. Free-tier availability, quotas, and model access can vary. Google may use free-tier prompts to improve its products, so avoid submitting sensitive customer information. See [Gemini model details and pricing](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite).
